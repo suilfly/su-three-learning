@@ -1,9 +1,9 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue';
+import Material from './lessons/Material.vue';
 </script>
 
 <template>
-  <HelloWorld />
+  <Material />
 </template>
 
 <style scoped></style>

@@ -4,6 +4,8 @@ import * as THREE from 'three';
 import { onMounted } from 'vue';
 import doorColor from '../assets/color.jpg';
 import normalColor from '../assets/normal.jpg';
+import boxTexture from '../assets/checkerboard-1024x1024.png';
+import boxTexture_s from '../assets/checkerboard-8x8.png';
 
 defineProps({
   msg: String,
@@ -29,7 +31,7 @@ onMounted(() => {
    * create camera
    */
   const camera = new THREE.PerspectiveCamera(
-    45,
+    75,
     sizes.width / sizes.height,
     0.1,
     100
@@ -74,7 +76,7 @@ onMounted(() => {
   const textureLoader = new THREE.TextureLoader(loadingManager);
 
   const colorTexture = textureLoader.load(doorColor);
-  const normalTexture = textureLoader.load(doorColor);
+  const normalTexture = textureLoader.load(boxTexture_s);
 
   loadingManager.onStart = () => {
     console.log('start loading');
@@ -100,6 +102,19 @@ onMounted(() => {
   normalTexture.offset.y = 0.3; */
   normalTexture.rotation = Math.PI / 4;
   normalTexture.colorSpace = THREE.SRGBColorSpace; // to fixed texture looks greyish
+  // add filter
+  /**
+   * mipmapping
+   * what is mipmapping? is a rendering teqnique that can devide texture into smaller and smaller size until 1x1 size.
+   * when mipmapping is enabled(by defualt), the GPU will use the different size versions of the texture depending how far it is from the camera.
+   */
+
+  /**
+   * the minification filter defined the texture minification function to be used while the texture is too big for the surface.
+   */
+  // normalTexture.minFilter = THREE.NearestFilter;
+
+  normalTexture.magFilter = THREE.NearestFilter;
 
   /**
    * create objects
