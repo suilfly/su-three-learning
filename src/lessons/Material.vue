@@ -8,6 +8,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { onMounted } from 'vue';
+import gradient1 from '../assets/gradients/3.jpg';
 
 onMounted(() => {
   const sizes = {
@@ -33,12 +34,43 @@ onMounted(() => {
 
   const controls = new OrbitControls(camera, renderer.domElement);
 
-  const cubeGeo = new THREE.BoxGeometry(1, 1, 1);
-  const material = new THREE.MeshBasicMaterial({
+  const textureLoader = new THREE.TextureLoader();
+  const gradientTexture1 = textureLoader.load(gradient1);
+
+  /* const material = new THREE.MeshBasicMaterial({
     color: 'red',
-  });
-  const mesh = new THREE.Mesh(cubeGeo, material);
-  scene.add(mesh);
+  }); */
+
+  const material = new THREE.MeshToonMaterial();
+  // material.gradientMap = gradientTexture1;
+
+  const sphere = new THREE.Mesh(
+    new THREE.SphereGeometry(0.5, 64, 64),
+    material
+  );
+
+  // const material = new THREE.MeshNormalMaterial();
+
+  // material properties
+  // material.wireframe = true;
+
+  // must set the transparent property to true, otherwise the opacity will not work
+  /* material.transparent = true;
+  material.opacity = 0.5; */
+
+  scene.add(sphere);
+
+  /**
+   * light
+   */
+  const ambientLight = new THREE.AmbientLight(0xffffff);
+  scene.add(ambientLight);
+
+  const pointLight = new THREE.PointLight(0xffffff, 20);
+  pointLight.position.x = 2;
+  pointLight.position.y = 2;
+  pointLight.position.z = 3;
+  scene.add(pointLight);
 
   const tick = () => {
     controls.update();

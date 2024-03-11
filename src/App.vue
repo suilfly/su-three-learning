@@ -1,9 +1,9 @@
 <script setup>
-import Material from './lessons/Material.vue';
+import Text3D from './lessons/Text3D.vue';
 </script>
 
 <template>
-  <Material />
+  <Text3D />
 </template>
 
 <style scoped></style>
