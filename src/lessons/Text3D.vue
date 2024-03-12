@@ -3,12 +3,13 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
-import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
-import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
-import typefaceFont from "/static/fonts/helvetiker_regular.typeface.json";
+import { onMounted, ref } from 'vue';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
+import matcapImg from '../assets/matcaps/1.png';
+import typefaceFont from '/static/fonts/helvetiker_regular.typeface.json';
 
 const canvasDom = ref();
 const renderFunction = () => {
@@ -38,8 +39,8 @@ const renderFunction = () => {
 
   // load font
   const fontLoader = new FontLoader();
-  fontLoader.load("/static/fonts/helvetiker_regular.typeface.json", (font) => {
-    const textGeometry = new TextGeometry("hello text-geometry", {
+  fontLoader.load('/static/fonts/helvetiker_regular.typeface.json', (font) => {
+    const textGeometry = new TextGeometry('hello text-geometry', {
       font: font,
       size: 0.5,
       height: 0.2,
@@ -65,16 +66,22 @@ const renderFunction = () => {
     scene.add(text);
   });
 
-  // add random geometry
-  const randomGeometry = new THREE.RingGeometry()
-  const randomMaterial = new THREE.MeshBasicMaterial()
-  for (let i = 0; i < 1000; i++) {
-    const randomMesh = new THREE.Mesh(randomGeometry, randomMaterial)
+  // load texture
+  const textureLoader = new THREE.TextureLoader();
+  const matcapTexture = textureLoader.load(matcapImg);
 
-    randomMesh.position.x = Math.random()
-    randomMesh.position.y = Math.random()
-    randomMesh.position.z = Math.random()
-    scene.add(randomMesh)
+  // add random geometry
+  const randomGeometry = new THREE.RingGeometry();
+  const randomMaterial = new THREE.MeshMatcapMaterial({
+    matcap: matcapTexture,
+  });
+  for (let i = 0; i < 1000; i++) {
+    const randomMesh = new THREE.Mesh(randomGeometry, randomMaterial);
+
+    randomMesh.position.x = Math.random();
+    randomMesh.position.y = Math.random();
+    randomMesh.position.z = Math.random();
+    scene.add(randomMesh);
   }
 
   const tick = () => {
