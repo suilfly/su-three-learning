@@ -36,6 +36,9 @@ const renderFunction = () => {
   camera.position.z = 4;
 
   const control = new OrbitControls(camera, renderer.domElement);
+  // load texture
+  const textureLoader = new THREE.TextureLoader();
+  const matcapTexture = textureLoader.load(matcapImg);
 
   // load font
   const fontLoader = new FontLoader();
@@ -59,16 +62,12 @@ const renderFunction = () => {
       -textGeometry.boundingBox.max.z / 2
     );
 
-    const material = new THREE.MeshBasicMaterial({
-      wireframe: true,
+    const material = new THREE.MeshMatcapMaterial({
+      matcap: matcapTexture,
     });
     const text = new THREE.Mesh(textGeometry, material);
     scene.add(text);
   });
-
-  // load texture
-  const textureLoader = new THREE.TextureLoader();
-  const matcapTexture = textureLoader.load(matcapImg);
 
   // add random geometry
   const randomGeometry = new THREE.RingGeometry();
