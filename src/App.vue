@@ -1,9 +1,9 @@
 <script setup>
-import Text3D from './lessons/Text3D.vue';
+import shadow from './lessons/shadow.vue';
 </script>
 
 <template>
-  <Text3D />
+  <shadow />
 </template>
 
 <style scoped></style>
