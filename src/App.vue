@@ -1,9 +1,9 @@
 <script setup>
-import shadow from './lessons/shadow.vue';
+import HauntedHourse from './lessons/HauntedHouse.vue';
 </script>
 
 <template>
-  <shadow />
+  <HauntedHourse />
 </template>
 
 <style scoped></style>
