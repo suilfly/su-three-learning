@@ -1,9 +1,9 @@
 <script setup>
-import HauntedHourse from './lessons/HauntedHouse.vue';
+import Particles from './lessons/Particles.vue';
 </script>
 
 <template>
-  <HauntedHourse />
+  <Particles />
 </template>
 
-<style scoped></style>
+<style></style>
