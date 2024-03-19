@@ -30,7 +30,7 @@ const initFunction = () => {
     0.1,
     100
   );
-  camera.position.set(2, 2, 4);
+  camera.position.set(0, 0, 4);
   scene.add(camera);
 
   const control = new OrbitControls(camera, renderer.domElement);
@@ -76,12 +76,20 @@ const initFunction = () => {
 
   const particles = new THREE.Points(particlesGeometry, particlesMaterial);
   // add a box
-  scene.add(
-    new THREE.Mesh(
-      new THREE.BoxGeometry(1, 1, 1),
-      new THREE.MeshBasicMaterial()
-    )
+  const box = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1),
+    new THREE.MeshBasicMaterial({ color: 'yellow', depthTest: false })
   );
+  box.position.set(0, 0, 1);
+  scene.add(box);
+
+  // 测试depthTest
+  const plane = new THREE.Mesh(
+    new THREE.PlaneGeometry(2, 2),
+    new THREE.MeshBasicMaterial({ color: 'green', depthTest: false })
+  );
+  scene.add(plane);
+
   scene.add(particles);
 
   // add animation
