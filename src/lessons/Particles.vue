@@ -57,7 +57,7 @@ const initFunction = () => {
 
   // custom geometry use BufferGeometry
   const particlesGeometry = new THREE.BufferGeometry();
-  const count = 20000;
+  const count = 2000;
   const positions = new Float32Array(count * 3);
   const colors = new Float32Array(count * 3);
 
@@ -78,7 +78,7 @@ const initFunction = () => {
   // add a box
   const box = new THREE.Mesh(
     new THREE.PlaneGeometry(1, 1),
-    new THREE.MeshBasicMaterial({ color: 'yellow', depthTest: false })
+    new THREE.MeshBasicMaterial({ color: 'yellow' })
   );
   box.position.set(0, 0, 1);
   scene.add(box);
@@ -86,7 +86,7 @@ const initFunction = () => {
   // 测试depthTest
   const plane = new THREE.Mesh(
     new THREE.PlaneGeometry(2, 2),
-    new THREE.MeshBasicMaterial({ color: 'green', depthTest: false })
+    new THREE.MeshBasicMaterial({ color: 'green' })
   );
   scene.add(plane);
 
@@ -95,7 +95,23 @@ const initFunction = () => {
   // add animation
   const clock = new THREE.Clock();
 
+  // let particles wave
+  const animate = () => {
+    const elapsedTime = clock.getElapsedTime();
+    for (let i = 0; i < count * 3; i++) {
+      let i3 = i * 3;
+      const x = particlesGeometry.attributes.position.array[i3];
+      particlesGeometry.attributes.position.array[i3 + 1] = Math.sin(
+        elapsedTime + x
+      );
+    }
+    particlesGeometry.attributes.position.needsUpdate = true;
+  };
+
   const tick = () => {
+    //particles.rotation.y = clock.getElapsedTime() * 0.2;
+    animate();
+
     control.update();
     renderer.render(scene, camera);
     requestAnimationFrame(tick);
