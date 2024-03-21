@@ -1,9 +1,9 @@
 <script setup>
-import shadow from './lessons/shadow.vue';
+import GalaxyGenerator from './lessons/GalaxyGenerator.vue';
 </script>
 
 <template>
-  <shadow />
+  <galaxy-generator />
 </template>
 
 <style></style>
