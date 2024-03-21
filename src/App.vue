@@ -1,9 +1,9 @@
 <script setup>
-import Particles from './lessons/Particles.vue';
+import shadow from './lessons/shadow.vue';
 </script>
 
 <template>
-  <Particles />
+  <shadow />
 </template>
 
 <style></style>

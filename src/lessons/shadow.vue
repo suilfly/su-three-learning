@@ -7,6 +7,7 @@ import { onMounted, ref, render } from 'vue';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import bakedShadow from '../assets/shadow/bakedShadow.jpg';
+import simpleShadow from '@/shadow/simpleShadow.jpg';
 
 const shadowCanvas = ref<HTMLCanvasElement>(null);
 
@@ -32,27 +33,49 @@ const initFunction = () => {
   );
   camera.position.set(2, 2, 3);
 
-  const material = new THREE.MeshStandardMaterial();
+  // add textureLoader
+  const textureLoader = new THREE.TextureLoader();
+  const bakedShadowTexture = textureLoader.load(bakedShadow);
+  const simpleShadowTexture = textureLoader.load(simpleShadow);
+
+  //const material = new THREE.MeshStandardMaterial();
   const sphereMaterial = new THREE.MeshPhysicalMaterial({
     color: '#eee',
   });
 
   // add a plane
-  const plane = new THREE.PlaneGeometry(3, 3);
-  const planeMesh = new THREE.Mesh(plane, material);
+  const plane = new THREE.PlaneGeometry(6, 6);
+  const planeMaterial = new THREE.MeshBasicMaterial();
+  // use baked shadow
+  /* new THREE.MeshBasicMaterial({
+    map: bakedShadowTexture,
+  }); */
+  const planeMesh = new THREE.Mesh(plane, planeMaterial);
+  planeMesh.position.y = -0.5;
   planeMesh.rotation.x = -Math.PI / 2;
   planeMesh.rotation.z = Math.PI * 0.2;
 
   // add a sphere
-  const sphere = new THREE.SphereGeometry(0.3);
+  const sphere = new THREE.SphereGeometry(0.5, 32, 32);
   const shpereMesh = new THREE.Mesh(sphere, sphereMaterial);
-  shpereMesh.position.y = 0.3;
+  // shpereMesh.position.y = 0.5;
+
+  // add sphere shadow
+  const sphereShadow = new THREE.Mesh(
+    new THREE.PlaneGeometry(1.5, 1.5),
+    new THREE.MeshBasicMaterial({
+      color: '#000',
+      transparent: true,
+      alphaMap: simpleShadowTexture,
+    })
+  );
+  sphereShadow.rotation.x = -Math.PI / 2;
+  sphereShadow.position.y = planeMesh.position.y + 0.001;
 
   /* shpereMesh.castShadow = true;
   planeMesh.receiveShadow = true; */
 
-  scene.add(shpereMesh);
-  scene.add(planeMesh);
+  scene.add(shpereMesh, planeMesh, sphereShadow);
 
   // add light
   const light = new THREE.AmbientLight('#fff');
@@ -90,8 +113,24 @@ const initFunction = () => {
 
   const control = new OrbitControls(camera, renderer.domElement);
 
+  const clock = new THREE.Clock();
+  // 添加球体/阴影运动动画
+  const animationFunction = () => {
+    const elapsedTime = clock.getElapsedTime();
+    const sphereY = (shpereMesh.position.y = Math.abs(
+      Math.sin(elapsedTime * 2) * 1.5
+    ));
+    shpereMesh.position.x = Math.cos(elapsedTime);
+    shpereMesh.position.z = Math.sin(elapsedTime);
+
+    sphereShadow.position.x = shpereMesh.position.x;
+    sphereShadow.position.z = shpereMesh.position.z;
+    sphereShadow.material.opacity = 1 - sphereY;
+  };
+
   const tick = () => {
     control.update();
+    animationFunction();
     renderer.render(scene, camera);
     requestAnimationFrame(tick);
   };
