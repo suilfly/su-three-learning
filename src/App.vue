@@ -1,9 +1,13 @@
 <script setup>
-import GalaxyGenerator from './lessons/GalaxyGenerator.vue';
+import ScrollBasedAnimation from './lessons/ScrollBasedAnimation.vue';
 </script>
 
 <template>
-  <galaxy-generator />
+  <scroll-based-animation />
 </template>
 
-<style></style>
+<style>
+#app {
+  background-color: #1e1a20;
+}
+</style>
