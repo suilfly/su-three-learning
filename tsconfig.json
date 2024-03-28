@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
-    "allowJs": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "paths": {
       "@/*": ["./src/assets/*"]
-    }
+    },
+    "noImplicitAny": false
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]

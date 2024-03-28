@@ -1,9 +1,9 @@
 <script setup>
-import ScrollBasedAnimation from './lessons/ScrollBasedAnimation.vue';
+import Physics from './lessons/Physics.vue';
 </script>
 
 <template>
-  <scroll-based-animation />
+  <Physics />
 </template>
 
 <style>

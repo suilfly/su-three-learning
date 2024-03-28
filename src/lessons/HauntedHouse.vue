@@ -4,7 +4,6 @@
 
 <script setup lang="ts">
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { onMounted, ref } from 'vue';
 import color from '@/textures/door/color.jpg';
 import alpha from '@/textures/door/alpha.jpg';
@@ -13,9 +12,9 @@ import height from '@/textures/door/height.jpg';
 import normal from '@/textures/door/normal.jpg';
 import metalness from '@/textures/door/metalness.jpg';
 import roughness from '@/textures/door/roughness.jpg';
+import { OrbitControls } from 'three/examples/jsm/Addons.js';
 
 const canvasDom = ref<HTMLCanvasElement>();
-
 const initFn = () => {
   const size = {
     width: canvasDom.value!.clientWidth,
