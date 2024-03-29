@@ -1,9 +1,9 @@
 <script setup>
-import Physics from './lessons/Physics.vue';
+import ImportedModel from './lessons/ImportedModel.vue';
 </script>
 
 <template>
-  <Physics />
+  <ImportedModel />
 </template>
 
 <style>
