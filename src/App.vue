@@ -1,9 +1,9 @@
 <script setup>
-import ImportedModel from './lessons/ImportedModel.vue';
+import RayCasterAndMouse from './lessons/RayCasterAndMouse.vue';
 </script>
 
 <template>
-  <ImportedModel />
+  <RayCasterAndMouse />
 </template>
 
 <style>
