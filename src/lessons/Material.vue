@@ -84,13 +84,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.three-container {
+.three-container,
+.three-container canvas {
   width: 100%;
   height: 100%;
-
-  canvas {
-    width: 100%;
-    height: 100%;
-  }
 }
 </style>
