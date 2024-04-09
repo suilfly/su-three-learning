@@ -1,9 +1,9 @@
 <script setup>
-import RayCasterAndMouse from './lessons/RayCasterAndMouse.vue';
+import EnvironmentMap from './lessons/EnvironmentMap.vue';
 </script>
 
 <template>
-  <RayCasterAndMouse />
+  <EnvironmentMap />
 </template>
 
 <style>

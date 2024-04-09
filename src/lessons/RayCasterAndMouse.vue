@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import GUI from 'lil-gui';
 import { onMounted } from 'vue';
-import { Raycaster, Vector3 } from 'three';
+import { Raycaster } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/Addons.js';
 
 const initFunction = () => {

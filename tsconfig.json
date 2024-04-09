@@ -4,9 +4,8 @@
     "moduleResolution": "NodeNext",
     "paths": {
       "@/*": ["./src/assets/*"]
-    },
-    "noImplicitAny": false
+    }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "types/*.d.ts"],
   "exclude": ["node_modules"]
 }

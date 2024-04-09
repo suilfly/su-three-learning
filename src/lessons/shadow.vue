@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, render } from 'vue';
+import { onMounted, ref } from 'vue';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import bakedShadow from '../assets/shadow/bakedShadow.jpg';
