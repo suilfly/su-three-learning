@@ -1,9 +1,9 @@
 <script setup>
-import EnvironmentMap from './lessons/EnvironmentMap.vue';
+import Shader from './lessons/Shader.vue';
 </script>
 
 <template>
-  <EnvironmentMap />
+  <Shader />
 </template>
 
 <style>
