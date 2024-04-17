@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import bakedShadow from '../assets/shadow/bakedShadow.jpg';
 import simpleShadow from '@/shadow/simpleShadow.jpg';
 
