@@ -3,10 +3,12 @@
 </template>
 
 <script setup>
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import GUI from 'lil-gui';
-import { onMounted } from 'vue';
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import GUI from "lil-gui";
+import { onMounted } from "vue";
+import vertexShader from "../shader/first/vertex.glsl";
+import fragmentShader from "../shader/first/fragment.glsl";
 
 /**
  * Base
@@ -29,7 +31,10 @@ const textureLoader = new THREE.TextureLoader();
 const geometry = new THREE.PlaneGeometry(1, 1, 32, 32);
 
 // Material
-const material = new THREE.MeshBasicMaterial();
+const material = new THREE.RawShaderMaterial({
+  vertexShader: vertexShader,
+  fragmentShader: fragmentShader,
+});
 
 // Mesh
 const mesh = new THREE.Mesh(geometry, material);
@@ -45,7 +50,7 @@ const initFunction = () => {
   };
 
   // Canvas
-  const canvas = document.querySelector('canvas.webgl');
+  const canvas = document.querySelector("canvas.webgl");
 
   /**
    * Renderer
@@ -64,12 +69,12 @@ const initFunction = () => {
     75,
     sizes.width / sizes.height,
     0.1,
-    100
+    100,
   );
   camera.position.set(0.25, -0.25, 1);
   scene.add(camera);
 
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     // Update sizes
     sizes.width = window.innerWidth;
     sizes.height = window.innerHeight;
@@ -106,13 +111,6 @@ const initFunction = () => {
   };
 
   tick();
-};
-
-const usePersonalShader = () => {
-  const material = new THREE.RawShaderMaterial({
-    vertexShader: '',
-    fragmentShader: '',
-  });
 };
 
 onMounted(() => {
