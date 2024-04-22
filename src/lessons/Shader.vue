@@ -9,6 +9,7 @@ import GUI from "lil-gui";
 import { onMounted } from "vue";
 import vertexShader from "../shader/first/vertex.glsl";
 import fragmentShader from "../shader/first/fragment.glsl";
+import grassImg from "@/textures/grass/normal.jpg";
 
 /**
  * Base
@@ -23,6 +24,7 @@ const scene = new THREE.Scene();
  * Textures
  */
 const textureLoader = new THREE.TextureLoader();
+const grassTexture = textureLoader.load(grassImg);
 
 /**
  * Test mesh
@@ -34,6 +36,9 @@ const geometry = new THREE.PlaneGeometry(1, 1, 32, 32);
 const material = new THREE.RawShaderMaterial({
   vertexShader: vertexShader,
   fragmentShader: fragmentShader,
+  uniforms: {
+    uTexture: { value: grassTexture },
+  },
 });
 
 // Mesh
