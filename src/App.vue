@@ -1,9 +1,9 @@
 <script setup>
-import Shader from './lessons/Shader.vue';
+import Texture from "./lessons/Texture.vue";
 </script>
 
 <template>
-  <Shader />
+  <Texture />
 </template>
 
 <style>

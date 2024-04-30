@@ -1,11 +1,11 @@
 <script setup>
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import * as THREE from 'three';
-import { onMounted } from 'vue';
-import doorColor from '../assets/color.jpg';
-import normalColor from '../assets/normal.jpg';
-import boxTexture from '../assets/checkerboard-1024x1024.png';
-import boxTexture_s from '../assets/checkerboard-8x8.png';
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import * as THREE from "three";
+import { onMounted } from "vue";
+import doorColor from "../assets/color.jpg";
+import normalColor from "../assets/normal.jpg";
+import boxTexture from "../assets/checkerboard-1024x1024.png";
+import boxTexture_s from "../assets/checkerboard-8x8.png";
 
 defineProps({
   msg: String,
@@ -20,7 +20,7 @@ onMounted(() => {
   /**
    * get the dom
    */
-  const canvas = document.querySelector('.three-container');
+  const canvas = document.querySelector(".three-container");
 
   /**
    * create scene
@@ -34,7 +34,7 @@ onMounted(() => {
     75,
     sizes.width / sizes.height,
     0.1,
-    100
+    100,
   );
 
   camera.position.set(1, 1, 1);
@@ -56,7 +56,7 @@ onMounted(() => {
   /**
    * update when resize the window
    */
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     // update sizes
     sizes.width = window.innerWidth;
     sizes.height = window.innerHeight;
@@ -79,28 +79,29 @@ onMounted(() => {
   const normalTexture = textureLoader.load(boxTexture_s);
 
   loadingManager.onStart = () => {
-    console.log('start loading');
+    console.log("start loading");
   };
 
   loadingManager.onLoad = () => {
-    console.log('loading complete');
+    console.log("loading complete");
   };
 
   loadingManager.onProgress = () => {
-    console.log('loading progressing');
+    console.log("loading progressing");
   };
 
   loadingManager.onError = () => {
-    console.log('loading error');
+    console.log("loading error");
   };
-  normalTexture.wrapS = THREE.RepeatWrapping;
+  /* normalTexture.wrapS = THREE.RepeatWrapping;
   normalTexture.wrapT = THREE.RepeatWrapping;
   normalTexture.repeat.x = 2;
-  normalTexture.repeat.y = 2;
+  normalTexture.repeat.y = 2; */
+  //normalTexture.flipY = false;
 
   /* normalTexture.offset.x = 0.3;
   normalTexture.offset.y = 0.3; */
-  normalTexture.rotation = Math.PI / 4;
+  // normalTexture.rotation = Math.PI / 4;
   normalTexture.colorSpace = THREE.SRGBColorSpace; // to fixed texture looks greyish
   // add filter
   /**
