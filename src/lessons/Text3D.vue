@@ -3,13 +3,12 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
-import matcapImg from '../assets/matcaps/1.png';
-import typefaceFont from '/static/fonts/helvetiker_regular.typeface.json';
+import { onMounted, ref } from "vue";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
+import matcapImg from "../assets/matcaps/1.png";
 
 const canvasDom = ref();
 const renderFunction = () => {
@@ -30,7 +29,7 @@ const renderFunction = () => {
     50,
     sizes.with / sizes.height,
     1,
-    1000
+    1000,
   );
 
   camera.position.z = 4;
@@ -42,8 +41,8 @@ const renderFunction = () => {
 
   // load font
   const fontLoader = new FontLoader();
-  fontLoader.load('/static/fonts/helvetiker_regular.typeface.json', (font) => {
-    const textGeometry = new TextGeometry('hello text-geometry', {
+  fontLoader.load("/static/fonts/helvetiker_regular.typeface.json", (font) => {
+    const textGeometry = new TextGeometry("hello text-geometry", {
       font: font,
       size: 0.5,
       height: 0.2,
@@ -59,7 +58,7 @@ const renderFunction = () => {
     textGeometry.translate(
       -textGeometry.boundingBox.max.x / 2,
       -textGeometry.boundingBox.max.y / 2,
-      -textGeometry.boundingBox.max.z / 2
+      -textGeometry.boundingBox.max.z / 2,
     );
 
     const material = new THREE.MeshMatcapMaterial({

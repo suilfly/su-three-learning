@@ -1,9 +1,9 @@
 <script setup>
-import Texture from "./lessons/Texture.vue";
+import WebGlCamera from "./lessons/WebGlCamera.vue";
 </script>
 
 <template>
-  <Texture />
+  <WebGlCamera />
 </template>
 
 <style>
