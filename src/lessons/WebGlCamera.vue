@@ -1,6 +1,6 @@
 <script setup>
 import * as THREE from "three";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 import Stats from "three/examples/jsm/libs/stats.module.js";
 
 const screenWidth = window.innerWidth;
@@ -133,13 +133,13 @@ const render = () => {
 
   activeHelper.visible = true;
 
+  // 设置清空颜色缓冲区时的颜色值
   renderer.setClearColor(0x000000, 1);
-  // 设置剪裁的区域，x,y,width,height。(x, y)位于剪裁区域的左下角（low-left corner)
+  // 设置剪裁的区域，x,y,width,height。(x, y)位于剪裁区域的左下角（low-left corner)。物体不会被拉伸
   renderer.setScissor(0, 0, screenWidth / 2, screenHeight);
-  // 设置视口，x,y,width,height。(x, y)位于视口的左下角（low-left corner)
+  // 设置视口，x,y,width,height。(x, y)位于视口的左下角（low-left corner)。物体可能会被拉伸
   renderer.setViewport(0, 0, screenWidth / 2, screenHeight);
   renderer.render(scene, camera);
-
   //
 
   activeHelper.visible = false;
@@ -161,6 +161,9 @@ const onKeyDownHandle = (event) => {
     case 80:
       activeCamera.value = cameraPerspective;
       activeHelper = cameraPerspectiveHelper;
+
+      // 更新相机的投影矩阵，在相机的参数改变后必须调用
+      // cameraPerspective.updateProjectionMatrix();
       break;
   }
 };
