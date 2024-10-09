@@ -1,9 +1,9 @@
 <script setup>
-import WebGLCameraArray from "./lessons/WebGLCameraArray.vue";
+import WebGLCinematicCamera from "./lessons/WebGLCinematicCamera.vue";
 </script>
 
 <template>
-  <WebGLCameraArray />
+  <WebGLCinematicCamera />
 </template>
 
 <style>
